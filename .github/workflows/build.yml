@@ -16,7 +16,9 @@ jobs:
         aws-region: ${{ secrets.REGION }}
 
   build-and-push-to-pub-ecr:
-    runs-on: ubuntu-latest                                 
+    runs-on: ubuntu-latest  
+    needs:
+      login-to-aws      #This means that the second job needs the firstjob so as to log in sequence
     steps:
     - name: Code Checkout
       uses: actions/checkout@v4
@@ -35,6 +37,11 @@ jobs:
         docker build -t devpub .
         docker tag devpub:latest public.ecr.aws/v3q1f7h3/devpub:${BUILD_ID}
         docker push public.ecr.aws/v3q1f7h3/devpub:${BUILD_ID}
+        
+     
+      
+
+        
 
 
 
