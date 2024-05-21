@@ -35,8 +35,8 @@ jobs:
     - name: Build  Image
       run: |
         docker build -t devpub .
-        docker tag devpub:latest public.ecr.aws/v3q1f7h3/devpub:${BUILD_ID}
-        docker push public.ecr.aws/v3q1f7h3/devpub:${BUILD_ID}
+        docker tag devpub:latest public.ecr.aws/v3q1f7h3/devpub:v1
+        docker push public.ecr.aws/v3q1f7h3/devpub:v1
         
      
       
