@@ -1,9 +1,9 @@
 nanme: Build to AWS
-on: push         #Used to define the pipeline triggers
+on: push         
 
 jobs:
   login-to-aws:
-    runs-on: ubuntu-latest                                 #Here you define the runners(Github hosted runner or self-hosted runner)
+    runs-on: ubuntu-latest                                 
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.5
