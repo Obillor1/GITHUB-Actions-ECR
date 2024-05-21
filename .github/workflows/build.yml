@@ -35,8 +35,32 @@ jobs:
     - name: Build  Image
       run: |
         docker build -t devpub .
-        docker tag devpub:latest public.ecr.aws/v3q1f7h3/devpub:v1
-        docker push public.ecr.aws/v3q1f7h3/devpub:v1
+        docker tag devpub:latest public.ecr.aws/v3q1f7h3/devpub:$GITHUB_RUN_ID
+        docker push public.ecr.aws/v3q1f7h3/devpub:$GITHUB_RUN_ID
+
+
+  build-and-push-to-pri-ecr:
+    runs-on: ubuntu-latest  
+    needs:
+      build-and-push-to-pub-ecr     #This means that the second job needs the firstjob so as to log in sequence
+    steps:
+    - name: Code Checkout
+      uses: actions/checkout@v4
+
+    - name: Login to AWSECR
+      uses: docker/login-action@v3
+      with:
+        registry: 275254035816.dkr.ecr.us-east-2.amazonaws.com
+        username: ${{ secrets.ACCESS_KEY }}
+        password: ${{ secrets.SECRET_ACCESS_KEY }}
+      env:
+        aws-region: ${{ secrets.REGION }}
+
+    - name: Build  Image
+      run: |
+        docker build -t devpri .
+        docker tag devpri:latest 275254035816.dkr.ecr.us-east-2.amazonaws.com/devpri:$GITHUB_RUN_ID
+        docker push 275254035816.dkr.ecr.us-east-2.amazonaws.com/devpri:$GITHUB_RUN_ID
         
      
       
