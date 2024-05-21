@@ -1,4 +1,4 @@
-nanme: Build to AWS
+name: Build to AWS
 on: push         
 
 jobs:
