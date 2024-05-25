@@ -5,7 +5,7 @@ jobs:
   login-to-aws:
     runs-on: ubuntu-latest                                 
     steps:
-    - name: Code Checkout
+    - name: Code Checkout #indicates that the step involves checking out the code from the repository
       uses: actions/checkout@v4
 
     - name: Login to AWS
